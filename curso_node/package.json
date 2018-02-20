@@ -1,0 +1,22 @@
+{
+  "name": "portal_noticias",
+  "version": "1.0.0",
+  "description": "Portal de Notícias",
+  "main": "noticias.js",
+  "scripts": {
+    "test": "git@github.com:JesusRJ/study_nodejs.git"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/JesusRJ/study_nodejs.git"
+  },
+  "author": "Reginaldo Jesus <reginaldo.jesus@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JesusRJ/study_nodejs/issues"
+  },
+  "homepage": "https://github.com/JesusRJ/study_nodejs#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
