@@ -1,0 +1,19 @@
+version: "2"
+
+services:
+  mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: portal_noticias
+      MYSQL_ROOT_PASSWORD: portal
+      MYSQL_USER: portal
+      MYSQL_PASSWORD: portal
+    volumes:
+      - mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+volumes:
+  mysql:
+    driver: local
