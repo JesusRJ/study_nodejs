@@ -5,4 +5,4 @@ create table noticias(
   data_criacao timestamp default current_timestamp
 );
 
-insert into noticias(titulo, noticia) values('Titulo da Noticia', 'Corpo da notícia');
+insert into noticias(titulo, noticia) values('Titulo da Noticia 2', 'Corpo da noticia 2');
