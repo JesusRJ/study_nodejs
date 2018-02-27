@@ -10,6 +10,8 @@ var app = express();
 app.set('view engine', 'ejs'); 
 app.set('views', './app/views');
 
+// Setting public assets
+app.use(express.static('./app/public'));
 // Setting body-parser as middleware
 app.use(bodyParser.urlencoded({extended: true}));
 // Setting express-validator as middleware
@@ -21,9 +23,11 @@ app.use(expressValidator({
   }
 }));
 
+// Consign: include modules automatically in app object
 consign()
   .include('app/routes')
   .then('app/models')
+  .then('app/controllers')
   .then('config/dbConnection.js')
   .into(app);
 
