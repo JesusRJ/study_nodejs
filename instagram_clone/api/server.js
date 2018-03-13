@@ -1,4 +1,5 @@
-var express = require('express'),
+var os = require('os'),
+  express = require('express'),
 	bodyParser = require('body-parser'),
 	mongodb = require('mongodb'),
 	objectId = require('mongodb').ObjectId;
@@ -13,9 +14,11 @@ var port = 8080;
 
 app.listen(port);
 
+var mongoHost = (os.hostname() == "br-jesusrj" ? "192.168.99.100" : "localhost");
+
 var db = new mongodb.Db(
 	'instagram',
-	new mongodb.Server('localhost', 27017, {}),
+	new mongodb.Server(mongoHost, 27017, {}),
 	{}
 );
 
@@ -29,16 +32,18 @@ app.get('/', function(req, res){
 //POST (create)
 app.post('/api', function(req, res){
 
+	res.setHeader('Access-Control-Allow-Origin', '*');
+
 	var dados = req.body;
 
 	db.open( function(err, mongoclient){
 		mongoclient.collection('postagens', function(err, collection){
 			collection.insert(dados, function(err, records){
 				if(err){
-					res.json({'status' : 'erro'});
-				} else {
-					res.json({'status' : 'inclusao realizada com sucesso'});
-				}
+						res.json(err);
+					} else {
+						res.json(records);
+					}
 				mongoclient.close();
 			});
 		});
@@ -112,6 +117,9 @@ app.delete('/api/:id', function(req, res){
 				} else {
 					res.json(records);
 				}
+
+				mongoclient.close();
+				
 			});
 		});
 	});

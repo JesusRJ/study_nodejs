@@ -36,6 +36,8 @@
 					formData.append('arquivo', arquivo);
 					formData.append('titulo', titulo);
 
+					alert(formData.body);
+
 					var xhr = new XMLHttpRequest();
 
 					xhr.onreadystatechange = function(){

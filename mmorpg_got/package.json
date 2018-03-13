@@ -17,6 +17,7 @@
     "express-session": "^1.15.6",
     "express-validator": "^2.20.8",
     "mongodb": "^2.2.33",
-    "npm": "^5.7.1"
+    "npm": "^5.7.1",
+    "os": "^0.1.1"
   }
 }
