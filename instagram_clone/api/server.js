@@ -14,6 +14,17 @@ app.use(bodyParser.urlencoded({ extended:true}));
 app.use(bodyParser.json());
 app.use(multiparty());
 
+// Tratamento de http options (preflight)
+app.use(function(req, res, next){
+
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+	res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+	res.setHeader('Access-Control-Allow-Credentials', true);
+
+	next();
+});
+
 var port = 8080;
 
 app.listen(port);
@@ -35,8 +46,6 @@ app.get('/', function(req, res){
 
 //POST (create)
 app.post('/api', function(req, res){
-
-	res.setHeader('Access-Control-Allow-Origin', '*');
 
 	var date = new Date();
 	var time_stamp = date.getTime();
@@ -74,8 +83,6 @@ app.post('/api', function(req, res){
 //GET (ready)
 app.get('/api', function(req, res){
 
-	res.setHeader('Access-Control-Allow-Origin', '*');
-
 	db.open( function(err, mongoclient){
 		mongoclient.collection('postagens', function(err, collection){
 			collection.find().toArray(function(err, results){
@@ -93,8 +100,6 @@ app.get('/api', function(req, res){
 
 //GET by ID (ready)
 app.get('/api/:id', function(req, res){
-
-	res.setHeader('Access-Control-Allow-Origin', '*');
 
 	db.open( function(err, mongoclient){
 		mongoclient.collection('postagens', function(err, collection){
@@ -130,32 +135,30 @@ app.get('/imagens/:imagem', function(req, res){
 //PUT by ID (update)
 app.put('/api/:id', function(req, res){
 
-	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.json(req.body.comentario);
 
-	db.open( function(err, mongoclient){
-		mongoclient.collection('postagens', function(err, collection){
-			collection.update(
-				{ _id : objectId(req.params.id) },
-				{ $set : { titulo : req.body.titulo}},
-				{},
-				function(err, records){
-					if(err){
-						res.json(err);
-					} else {
-						res.json(records);
-					}
+	// db.open( function(err, mongoclient){
+	// 	mongoclient.collection('postagens', function(err, collection){
+	// 		collection.update(
+	// 			{ _id : objectId(req.params.id) },
+	// 			{ $set : { titulo : req.body.titulo}},
+	// 			{},
+	// 			function(err, records){
+	// 				if(err){
+	// 					res.json(err);
+	// 				} else {
+	// 					res.json(records);
+	// 				}
 
-					mongoclient.close();
-				}
-			);
-		});
-	});
+	// 				mongoclient.close();
+	// 			}
+	// 		);
+	// 	});
+	// });
 });
 
 //DELETE by ID (remover)
 app.delete('/api/:id', function(req, res){
-	
-	res.setHeader('Access-Control-Allow-Origin', '*');
 
 	db.open( function(err, mongoclient){
 		mongoclient.collection('postagens', function(err, collection){
