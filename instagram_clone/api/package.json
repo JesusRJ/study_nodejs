@@ -8,6 +8,9 @@
   },
   "author": "Jorge",
   "license": "ISC",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "body-parser": "^1.15.2",
     "connect-multiparty": "^2.1.0",

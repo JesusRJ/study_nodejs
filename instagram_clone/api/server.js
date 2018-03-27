@@ -29,11 +29,18 @@ var port = 8080;
 
 app.listen(port);
 
-var mongoHost = (os.hostname() == "br-jesusrj" ? "192.168.99.100" : "localhost");
+var databaseHost = process.env.DATABASE_HOST;
+var databasePort = process.env.DATABASE_PORT || 27017;
+
+if (databaseHost === undefined){
+	var databaseHost = (os.hostname() == "br-jesusrj" ? "192.168.99.100" : "localhost");
+}
+
+console.log("Endereço do Banco de dados", databaseHost + ":" + databasePort);
 
 var db = new mongodb.Db(
 	'instagram',
-	new mongodb.Server(mongoHost, 27017, {}),
+	new mongodb.Server(databaseHost, 27017, {}),
 	{}
 );
 
