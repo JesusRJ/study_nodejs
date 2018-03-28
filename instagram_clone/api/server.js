@@ -25,7 +25,7 @@ app.use(function(req, res, next){
 	next();
 });
 
-var port = 8080;
+var port = process.env.API_PORT || 8080;
 
 app.listen(port);
 

@@ -1,14 +1,26 @@
-version: "2"
+version: "2.2"
 
 services:
   mongo:
     image: mongo:latest
-    # environment:
     volumes:
       - mongo:/data/db
+    # ports:
+    #   - "27017:27017"
+
+  api:
+    image: instaapi:1.0.0
+    environment:
+      - DATABASE_HOST:mongo
+      # - DATABASE_PORT:27017
     ports:
-      - "27017:27017"
-      - "28017:28017"
+      - "8180:8080"
+
+  client:
+    image: instacli:1.0.0
+    # ports:
+    #   - "8080:8080"
+    scale: 3
 
 volumes:
   mongo:
