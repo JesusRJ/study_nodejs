@@ -108,6 +108,8 @@ app.get('/api', function(req, res){
 //GET by ID (ready)
 app.get('/api/:id', function(req, res){
 
+	console.log("GET ID >>>>>>>> " + req.params.id);
+
 	db.open( function(err, mongoclient){
 		mongoclient.collection('postagens', function(err, collection){
 			collection.find(objectId(req.params.id)).toArray(function(err, results){

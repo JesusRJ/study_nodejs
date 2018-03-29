@@ -5,14 +5,16 @@ services:
     image: mongo:latest
     volumes:
       - mongo:/data/db
-    # ports:
-    #   - "27017:27017"
+    ports:
+      - "27017:27017"
 
   api:
     image: instaapi:1.0.0
     environment:
       - DATABASE_HOST:mongo
       # - DATABASE_PORT:27017
+    volumes:
+      - imagens:/usr/src/app/uploads
     ports:
       - "8180:8080"
 
@@ -24,4 +26,7 @@ services:
 
 volumes:
   mongo:
+    driver: local
+
+  imagens:
     driver: local
