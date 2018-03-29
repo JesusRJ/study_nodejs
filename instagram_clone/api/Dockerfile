@@ -11,8 +11,6 @@ COPY . .
 
 RUN npm install
 
-RUN ls -l
-
 EXPOSE 8080
 
 CMD [ "npm", "start" ]
