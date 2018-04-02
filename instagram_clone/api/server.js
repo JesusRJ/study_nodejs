@@ -3,7 +3,8 @@ var os = require('os'),
 	bodyParser = require('body-parser'),
 	multiparty = require('connect-multiparty'),
 	mongodb = require('mongodb'),
-	objectId = require('mongodb').ObjectId,
+
+	objectId = require('mongoose').Types.ObjectId,
 	fs = require('fs'),
 	mv = require('mv');
 
@@ -108,18 +109,26 @@ app.get('/api', function(req, res){
 //GET by ID (ready)
 app.get('/api/:id', function(req, res){
 
-	console.log("GET ID >>>>>>>> " + req.params.id);
+	if (!objectId.isValid(req.params.id)){
+		res.status(500).json({erro: "Identificador Inválido"});
+		return;
+	}
 
 	db.open( function(err, mongoclient){
 		mongoclient.collection('postagens', function(err, collection){
-			collection.find(objectId(req.params.id)).toArray(function(err, results){
-				if(err){
-					res.json(err);
-				} else {
-					res.status(200).json(results);
-				}
-				mongoclient.close();
-			});
+
+			if (err){
+				res.json(err);
+			} else {
+				collection.find(objectId(req.params.id)).toArray(function(err, results){
+					if(err){
+						res.json(err);
+					} else {
+						res.status(200).json(results);
+					}
+					mongoclient.close();
+				});
+			}
 		});
 	});
 

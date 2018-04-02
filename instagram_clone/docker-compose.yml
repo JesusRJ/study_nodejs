@@ -5,28 +5,34 @@ services:
     image: mongo:latest
     volumes:
       - mongo:/data/db
-    ports:
-      - "27017:27017"
+    # ports:
+    #   - "27017:27017"
 
   api:
-    image: instaapi:1.0.0
+    image: instaapi:latest
     environment:
-      - DATABASE_HOST:mongo
-      # - DATABASE_PORT:27017
+      - DATABASE_HOST=mongo
+      # - DATABASE_PORT=27017
     volumes:
-      - imagens:/usr/src/app/uploads
+      - uploads:/usr/src/app/uploads
+    # A API tem que ser exposta em um endereço válido na rede,
+    # pois o client web é Single Application
     ports:
       - "8180:8080"
 
   client:
-    image: instacli:1.0.0
-    # ports:
-    #   - "8080:8080"
-    scale: 3
+    image: instacli:latest
+    environment:
+      >> ver pq o endereço correto da api não é pego pelo container
+      - API_ADDRESS=192.168.0.11
+      - API_ADDRESS=8180
+    ports:
+      - "9000:8080"
+    # scale: 2
 
 volumes:
   mongo:
     driver: local
 
-  imagens:
+  uploads:
     driver: local

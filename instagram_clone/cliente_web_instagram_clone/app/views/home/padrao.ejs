@@ -18,6 +18,7 @@
 			$(document).ready(function(){
 
 				var url_api = '<%= api_address %>';
+				var url_imagens = '<%= images_address %>';
 
 				function carrega_postagens(){
 					var xhr = new XMLHttpRequest();
@@ -33,7 +34,7 @@
 										'<span class="titulo">' +
 											data[i].titulo +
 										'</span>' + 
-										'<img src="'+url_api+'/imagens/' + data[i].url_imagem + '" height="200" width="300"/>' +
+										'<img src="'+url_imagens+data[i].url_imagem + '" height="200" width="300"/>' +
 										'<div class="comentarios" id="comentarios_'+data[i]._id+'"></div>'+
 										'<div class="comentar">'+
 											'<input type="text" class="form-control input_comentario" id="postagem_'+data[i]._id+'" placeholder="Adicione um comentário" />'+

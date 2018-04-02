@@ -9,6 +9,10 @@ WORKDIR /usr/src/app
 
 COPY . .
 
+VOLUME /usr/src/app/uploads
+
+RUN echo "--- Diretório de Upload de Imagens" >> /usr/src/app/uploads/READM.md
+
 RUN npm install
 
 EXPOSE 8080
