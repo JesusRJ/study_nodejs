@@ -127,6 +127,10 @@
 
 							document.getElementById('mensagem').innerHTML = resposta;
 
+							if(xhr.status === 200){
+								window.location.href = '/home';
+							}
+
 						}
 					};
 

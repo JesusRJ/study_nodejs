@@ -9,7 +9,7 @@ services:
     #   - "27017:27017"
 
   api:
-    image: instaapi:latest
+    image: instaapi:1.0.0
     environment:
       - DATABASE_HOST=mongo
       # - DATABASE_PORT=27017
@@ -19,15 +19,20 @@ services:
     # pois o client web é Single Application
     ports:
       - "8180:8080"
+    # Constroi a imagem da API
+    build:
+      context: ./api
 
   client:
-    image: instacli:latest
+    image: instacli:1.0.0
     environment:
-      >> ver pq o endereço correto da api não é pego pelo container
       - API_ADDRESS=192.168.0.11
-      - API_ADDRESS=8180
+      - API_PORT=8180
     ports:
-      - "9000:8080"
+      - "8080:8080"
+    # Constroi a imagem do Client
+    build:
+      context: ./cliente_web
     # scale: 2
 
 volumes:

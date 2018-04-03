@@ -1,12 +1,12 @@
 {
-  "name": "server_instagram_clone",
+  "name": "instagram_clone_api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Instagram Clone API",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
-  "author": "Jorge",
+  "author": "Reginaldo Jesus <reginaldo.jesus@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
