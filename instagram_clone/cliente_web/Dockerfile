@@ -13,4 +13,7 @@ RUN npm install
 
 EXPOSE 8080
 
+# Exemplo usando o entrypoint: mais dificil de sobrescrever
+# ENTRYPOINT ["npm"]
+
 CMD [ "npm", "start" ]
