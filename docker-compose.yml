@@ -1,0 +1,15 @@
+version: "2.2"
+
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - sites:/usr/share/nginx/html
+    expose:
+       - 80
+
+volumes:
+  sites:
+    driver: local
+
+

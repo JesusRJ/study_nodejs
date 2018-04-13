@@ -9,7 +9,7 @@ services:
     #   - "27017:27017"
 
   api:
-    image: instaapi:1.0.0
+    image: instaapi:2.0.0
     environment:
       - DATABASE_HOST=mongo
       # - DATABASE_PORT=27017
@@ -24,9 +24,11 @@ services:
       context: ./api
 
   client:
-    image: instacli:1.0.0
+    image: instacli:2.0.0
+    labels:
+      - "com.service.context=/client"
     environment:
-      - API_ADDRESS=192.168.0.11
+      - API_ADDRESS=192.168.99.100
       - API_PORT=8180
     ports:
       - "8080:8080"
